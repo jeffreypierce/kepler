@@ -1,0 +1,79 @@
+orbit-width = 3px
+
+mercury-size = 15px
+mercury-orbit = 100px
+mercury-color = #99897B
+
+venus-size = 40px
+venus-orbit = 200px
+venus-color = #A34E00
+
+earth-size = 40px
+earth-orbit = 300px
+earth-color = #46588A
+
+mars-size = 20px
+mars-orbit = 400px
+mars-color = #952908
+
+jupiter-size = 120px
+jupiter-orbit = 750px
+jupiter-color = #785E4A
+
+saturn-size = 90px
+saturn-orbit = 1000px
+saturn-color = #72853C
+
+planet(orbit, size, color)
+  .orbit
+    border-radius orbit
+    width orbit
+    height orbit
+    border-color darken(color, 20)
+  .body
+    width size
+    height size
+    line-height size
+    border-radius size
+    top (size * -0.5) - orbit-width
+    left (orbit * 0.5) - (size * 0.5)
+    background-color color
+    .planet-symbol
+      padding-left size + orbit-width
+
+.orbit
+  position absolute
+  margin auto
+  top 0
+  left 0
+  right 0
+  bottom 0
+  border orbit-width solid bg-color
+  backface-visibility hidden
+
+.body
+  position absolute
+  border orbit-width solid bg-color
+  backface-visibility hidden
+
+.planet-symbol
+  color #999
+  font-family 'Starfont Sans'
+
+.mercury
+  planet(mercury-orbit, mercury-size, mercury-color)
+
+.venus
+  planet(venus-orbit, venus-size, venus-color)
+
+.earth
+  planet(earth-orbit, earth-size, earth-color)
+
+.mars
+  planet(mars-orbit, mars-size, mars-color)
+
+.jupiter
+  planet(jupiter-orbit, jupiter-size, jupiter-color)
+
+.saturn
+  planet(saturn-orbit, saturn-size, saturn-color)
