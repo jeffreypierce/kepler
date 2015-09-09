@@ -18,7 +18,7 @@ Planet = React.createClass
   rotate: (pos)->
     (360 + pos) % 360
 
-  onAudioToggle: () ->
+  onAudioToggle: ->
     if @state.navbarState.audioOn and @state.sound is null
       @setState {sound: new Audio()}
       @state.sound.play @props.freq, @props.position

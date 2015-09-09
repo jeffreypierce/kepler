@@ -1,5 +1,5 @@
 class Maths
-  constructor:()->
+  constructor: ->
     @deg2rad = Math.PI / 180
     @rad2deg = 180 / Math.PI
   rev:(angle) ->

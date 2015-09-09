@@ -48,8 +48,9 @@ class Audio
     dry.connect @output
 
     @output.connect @panner
-
     @panner.connect mainMix
+
+    mainMix
 
   play: (freq, position) ->
     @update freq, position

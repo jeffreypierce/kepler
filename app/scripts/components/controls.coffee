@@ -22,7 +22,6 @@ Controls = React.createClass
                 checkedState={@state.navbarState.audioOn}
                 callback={@handleAudioChange} />
 
-
         <Switch id="animation"
                 label="Animation"
                 className="animation-switch"

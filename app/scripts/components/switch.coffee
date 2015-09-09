@@ -4,16 +4,16 @@ Switch = React.createClass
 
   render: ->
     (
-      <span className={@props.className}>
-        <input  className="switch"
+      <span className={@props.className + " switch"}>
+        <label  className="switch__label"
+                htmlFor={@props.id}>
+                {@props.label}
+        </label>
+        <input  className="switch__input"
                 id={@props.id}
                 type="checkbox"
                 checked={@props.checkedState}
                 onChange={@props.callback} />
-        <label  className="switch__label"
-                htmlFor={@props.id}>
-                <span className="switch__title">{@props.label}</span>
-        </label>
       </span>
     )
 

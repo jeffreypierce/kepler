@@ -1,5 +1,4 @@
 Maths = require "./maths"
-jd = require "./julianDate"
 
 planetData = [
   {
@@ -11,7 +10,7 @@ planetData = [
     i: [  7.004986,      0.0018215,   -0.00001809,    0.000000053]
     N: [ 48.330893,      1.1861890,    0.00017587,    0.000000211]
     P: [ 77.456119,      1.5564775,    0.00029589,    0.000000056]
-    pitchRange: [800, 1000]
+    pitchRange: [1760, 4171.84]
   }
   {
     name: 'venus'
@@ -22,7 +21,7 @@ planetData = [
     i: [  3.394662,      0.0010037,   -0.00000088,   -0.000000007]
     N: [ 76.679920,      0.9011190,    0.00040665,   -0.000000080]
     P: [131.563707,      1.4022188,   -0.00107337,   -0.000005315]
-    pitchRange: [600, 800]
+    pitchRange: [659.998, 695.305]
   }
   {
     name: 'earth'
@@ -33,7 +32,7 @@ planetData = [
     i: [  0.0,           0.0,          0.0,           0.0]
     N: [  0.0,           0.0,          0.0,           0.0]
     P: [102.937348,      1.7195269,    0.00045962,    0.000000499]
-    pitchRange: [400, 600]
+    pitchRange: [391.109, 417.655]
   }
   {
     name: 'mars'
@@ -44,7 +43,7 @@ planetData = [
     i: [  1.849726,     -0.0006010,    0.00001276,   -0.000000006]
     N: [ 49.558093,      0.7720923,    0.00001605,    0.000002325]
     P: [336.060234,      1.8410331,    0.00013515,    0.000000318]
-    pitchRange: [300, 500]
+    pitchRange: [185.624, 260.74]
   }
   {
     name: 'jupiter'
@@ -55,7 +54,7 @@ planetData = [
     i: [  1.303270,     -0.0054966,    0.00000465,   -0.000000004]
     N: [100.464441,      1.0209550,    0.00040117,    0.000000569]
     P: [ 14.331309,      1.6126668,    0.00103127,   -0.000004569]
-    pitchRange: [200, 400]
+    pitchRange: [61.875, 73.333]
   }
   {
     name: 'saturn'
@@ -66,7 +65,7 @@ planetData = [
     i: [  2.488878,     -0.0037363,   -0.00001516,    0.000000089]
     N: [113.665524,      0.8770979,   -0.00012067,   -0.000002380]
     P: [ 93.056787,      1.9637694,    0.00083757,    0.000004899]
-    pitchRange: [440, 1000]
+    pitchRange: [24.444, 30.937]
   }
 ]
 
@@ -75,8 +74,10 @@ class Planet
     @name = planetData.name
     @label = planetData.label
     @p = planetData
+  toJulian: (date) ->
+    date.valueOf()/86400000 + 2440587.5
   positionOnDate: (date) ->
-    T = (jd.toJulian(date) - 2451545) / 36525
+    T = (@toJulian(date) - 2451545) / 36525
     T2 = T * T
     T3 = T2 * T
     # longitude of ascending node
@@ -91,7 +92,6 @@ class Planet
     e = @p.e[0] + @p.e[1] * T + @p.e[2] * T2 + @p.e[3] * T3
     # longitude of perihelion
     P = Maths.rev @p.P[0] + @p.P[1] * T + @p.P[2] * T2 + @p.P[3] * T3
-
 
     M = Maths.rev L - P
     w = Maths.rev L - N - M
@@ -110,14 +110,16 @@ class Planet
     v = Maths.rev Maths.atan2d(y, x)
 
     # Heliocentric Ecliptic Rectangular Coordinates
-    xeclip = r * (Maths.cosd(N) * Maths.cosd(v + w) - (Maths.sind(N) * Maths.sind(v + w) * Maths.cosd(i)))
-    yeclip = r * (Maths.sind(N) * Maths.cosd(v + w) + Maths.cosd(N) * Maths.sind(v + w) * Maths.cosd(i))
-    zeclip = r * Maths.sind(v + w) * Maths.sind(i)
-    @coords = {x: xeclip, y: yeclip, z:zeclip}
+    @coords =
+      x: r * (Maths.cosd(N) * Maths.cosd(v + w) - Maths.sind(N) * Maths.sind(v + w) * Maths.cosd(i))
+      y: r * (Maths.sind(N) * Maths.cosd(v + w) + Maths.cosd(N) * Maths.sind(v + w) * Maths.cosd(i))
+      z: r * Maths.sind(v + w) * Maths.sind(i)
 
     #eliptics degrees
-    @eclipticLongitude = Maths.atan2d(yeclip, xeclip)
-    @eclipticLatitude = Maths.atan2d(zeclip, Math.sqrt(xeclip * xeclip + yeclip * yeclip + zeclip * zeclip))
+    @eclipticLongitude = Maths.atan2d @coords.y, @coords.x
+    @eclipticLatitude = Maths.atan2d(
+      @coords.z,
+      Math.sqrt(@coords.x * @coords.x + @coords.y * @coords.y + @coords.z * @coords.z))
 
     @freq =
       (@p.pitchRange[1] + @p.pitchRange[0])/2 - (@p.pitchRange[1]

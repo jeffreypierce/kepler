@@ -5,11 +5,13 @@ MainMenu = React.createClass
 
   render: ->
     (
-      <div className="grid_4 mainmenu" onClick=NavbarActions.navbarToggle>
-        <div className="hamburger">
-          <div className="hamburger-bars">&nbsp;</div>
-        </div>
-        <a className="title">Harmonices Mundi</a>
+      <div className="grid_4" >
+        <a className="mainmenu" onClick={NavbarActions.navbarToggle}>
+          <div className="hamburger">
+            <div className="hamburger-bars">&nbsp;</div>
+          </div>
+          <span className="title">Harmonices Mundi</span>
+        </a>
       </div>
     )
 
