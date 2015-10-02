@@ -8,7 +8,7 @@ DateSelect = React.createClass
   render: ->
     (
       <div className="grid_4 dateselect">
-        <a>{@state.date.format("MMMM Do • YYYY")}</a>
+        <a>{@state.date.string}</a>
       </div>
 
     )

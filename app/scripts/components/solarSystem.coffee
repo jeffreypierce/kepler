@@ -20,7 +20,7 @@ SolarSystem = React.createClass
 
   calculatePositionOnDate: ->
     @state.planets.map (planet) =>
-      planet.positionOnDate @state.date
+      planet.positionOnDate @state.date.moment
 
   componentWillMount: ->
     @calculatePositionOnDate()
