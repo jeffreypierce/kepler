@@ -92,7 +92,7 @@ class Planet
     e = @p.e[0] + @p.e[1] * T + @p.e[2] * T2 + @p.e[3] * T3
     # longitude of perihelion
     P = Maths.rev @p.P[0] + @p.P[1] * T + @p.P[2] * T2 + @p.P[3] * T3
-
+    @P = Maths.normalize P
     M = Maths.rev L - P
     w = Maths.rev L - N - M
     # Eccentric anomaly
@@ -114,16 +114,43 @@ class Planet
       x: r * (Maths.cosd(N) * Maths.cosd(v + w) - Maths.sind(N) * Maths.sind(v + w) * Maths.cosd(i))
       y: r * (Maths.sind(N) * Maths.cosd(v + w) + Maths.cosd(N) * Maths.sind(v + w) * Maths.cosd(i))
       z: r * Maths.sind(v + w) * Maths.sind(i)
-
     #eliptics degrees
-    @eclipticLongitude = Maths.atan2d @coords.y, @coords.x
-    @eclipticLatitude = Maths.atan2d(
+    @elipticLongitude = Maths.atan2d @coords.y, @coords.x
+    @elipticLatitude = Maths.atan2d(
       @coords.z,
       Math.sqrt(@coords.x * @coords.x + @coords.y * @coords.y + @coords.z * @coords.z))
 
-    @freq =
+    @longitude = Maths.normalize @elipticLongitude
+    @latitude = Maths.normalize @elipticLatitude
+
+    freq =
       (@p.pitchRange[1] + @p.pitchRange[0])/2 - (@p.pitchRange[1]
-      - @p.pitchRange[0])/2 * Maths.cosd(@eclipticLongitude + P)
+      - @p.pitchRange[0])/2 * Maths.cosd(@elipticLongitude + P)
+
+    @frequency = Maths.normalize freq
+
+  noteFromFreq: ->
+
+    referenceFrequency = =>
+      # root frequency of C in equal temperament
+      16.351597831287414 * Math.pow 2, @octave
+
+    getNoteLetterFromFrequency = =>
+      baseFreq = Math.log @frequency / referenceFrequency()
+
+      # equal temperament naming
+      noteNumber = Math.round baseFreq / Math.log Math.pow(2, 1 / 12)
+
+      @octave += 1 if noteNumber is 12
+      noteArray = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
+
+      noteArray[noteNumber % 12]
+
+    rootFrequency = 16.351597831287414
+    @octave = Math.floor Math.log(@frequency / rootFrequency) / Math.log 2
+    letter = getNoteLetterFromFrequency()
+    @noteName = letter + @octave.toString()
+
 
 planets = []
 

@@ -6,7 +6,8 @@ interval = null
 navbarState =
   audioOn: false
   animationOn: false
-  navbarClass: 'navbar'
+  openClass: ''
+  volume: 40
 
 NavbarStore = Reflux.createStore
   listenables: NavbarActions
@@ -20,13 +21,18 @@ NavbarStore = Reflux.createStore
   onAnimationToggle: ->
     navbarState.animationOn = !navbarState.animationOn
     if navbarState.animationOn
-      interval = setInterval DateActions.incrementForwards, 50
+      interval = setInterval DateActions.incrementDate, 50
     else clearInterval interval
 
     @trigger navbarState
 
   onNavbarToggle: ->
-    navbarState.navbarClass = if navbarState.navbarClass is 'navbar' then 'navbar open' else 'navbar'
+    navbarState.openClass = if navbarState.openClass is '' then 'open' else ''
+    @trigger navbarState
+
+  updateVolume: (vol)->
+    navbarState.volume = vol
+    window.mainMix.gain.value = vol/100
     @trigger navbarState
 
 module.exports = NavbarStore

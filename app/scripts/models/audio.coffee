@@ -3,15 +3,13 @@ Maths = require "./maths"
 window.AudioContext = window.AudioContext || window.webkitAudioContext
 context = new AudioContext()
 
-mainMix = context.createGain()
+window.mainMix = context.createGain()
 compressor = context.createDynamicsCompressor()
-
-
 
 low = context.createBiquadFilter()
 low.type = 'lowshelf'
 low.frequency.value = 320.0
-low.gain.value = 15.0
+low.gain.value = 5.0
 low.connect compressor
 
 mid = context.createBiquadFilter()
@@ -24,7 +22,7 @@ mid.connect low
 high = context.createBiquadFilter()
 high.type = 'highshelf'
 high.frequency.value = 3200.0
-high.gain.value = -15.0
+high.gain.value = -5.0
 high.connect mid
 
 filter = context.createBiquadFilter()
@@ -32,7 +30,8 @@ filter.frequency.value = 20000.0
 filter.type = 'lowpass'
 filter.connect high
 
-mainMix.connect filter
+window.mainMix.gain.value = 0.45
+window.mainMix.connect filter
 compressor.connect context.destination
 
 generateImpulse = (length = 2, decay = 3) ->
@@ -89,14 +88,14 @@ class Audio
     @output.connect @panner
     @panner.connect mainMix
 
-  play: (freq, position) ->
-    @update freq, position
+  play: (freq, position, latitude) ->
+    @update freq, position, latitude
     @osc.start context.currentTime
     @osc2.start context.currentTime
     @setVolume @volume
 
-  update: (freq, position) ->
-    @setPan position
+  update: (freq, position, latitude) ->
+    @setPan position, latitude
     @osc.frequency.value = freq
     @osc2.frequency.value = freq * 2
 
@@ -104,7 +103,8 @@ class Audio
     @osc.stop context.currentTime
     @osc2.stop context.currentTime
 
-  setPan: (position) ->
+  setPan: (position, latitude) ->
+    yDeg = Maths.normalize latitude
     xDeg = position
     zDeg = (xDeg % 180) + 90
     zDeg = 180 - zDeg if zDeg > 90

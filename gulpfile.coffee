@@ -55,7 +55,7 @@ gulp.task "scripts", -> bundle
 gulp.task "styles", ->
   gulp.src files.styles.src
     .pipe styl
-      compress: not PROD
+      compress: false
     .pipe autoprefixer 'last 2 versions'
     .pipe gulp.dest files.styles.dest
     .pipe connect.reload()

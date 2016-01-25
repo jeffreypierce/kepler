@@ -1,6 +1,7 @@
 React = require "react"
 SolarSystem = require './components/solarSystem'
 Navbar = require './components/navbar'
+About = require './components/about'
 
 App = React.createClass
 
@@ -9,6 +10,7 @@ App = React.createClass
       <div className="container">
         <Navbar />
         <SolarSystem />
+        <About />
       </div>
     )
 

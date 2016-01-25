@@ -6,8 +6,8 @@ DateStore = require "../stores/dateStore"
 
 SolarSystem = React.createClass
   mixins: [
-    Reflux.connect(DateStore, "date")
-    Reflux.listenTo(DateStore, "onDateChange")
+    Reflux.connect DateStore, "date"
+    Reflux.listenTo DateStore, "onDateChange"
   ]
 
   getInitialState: ->
@@ -15,12 +15,13 @@ SolarSystem = React.createClass
       planets: planets
     }
 
-  onDateChange: () ->
+  onDateChange: ->
     @calculatePositionOnDate()
 
   calculatePositionOnDate: ->
     @state.planets.map (planet) =>
       planet.positionOnDate @state.date.moment
+      planet.noteFromFreq()
 
   componentWillMount: ->
     @calculatePositionOnDate()
@@ -32,8 +33,11 @@ SolarSystem = React.createClass
            <Planet  planetName = {planet.name}
                     planetLabel = {planet.label}
                     key = {i}
-                    freq = {planet.freq}
-                    position = {planet.eclipticLongitude}
+                    freq = {planet.frequency}
+                    longitude = {planet.longitude}
+                    latitude = {planet.latitude}
+                    noteName = {planet.noteName}
+                    P = {planet.P}
             />
           }
         </div>

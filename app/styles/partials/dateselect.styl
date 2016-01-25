@@ -1,0 +1,57 @@
+.dateselect
+  text-align center
+  &.input-on
+    .dateselect__display
+      display none
+    .dateselect__inputs
+      display block
+
+  .dateselect__display
+    transition color transition-speed ease-out
+    cursor pointer
+    &:hover
+      color #fff
+
+  .dateselect__inputs
+    display none
+    transition border-color transition-speed ease-out
+    &:hover
+      border-color #fff
+
+  .dateselect__input
+    width 20px
+    background-color #000
+    appearance none
+    border none
+    padding 2px
+    color #fff
+    text-align center
+    &.year
+      width 30px
+    &:focus
+      outline:none
+    &::placeholder
+      color #999
+
+  .button
+    transition background-color transition-speed ease-out
+    display inline-block
+    color #000
+    width 18px
+    height 18px
+    line-height 20px
+    margin-left 5px
+    background-color #555
+    text-align center
+    cursor pointer
+    border-radius 18px
+    &:hover
+      background-color #fff
+
+
+  .today-reset
+    margin-left 20px
+    transition color transition-speed ease-out
+    cursor pointer
+    &:hover
+      color #fff

@@ -1,9 +1,10 @@
 Reflux = require "reflux"
 
 DateActions = Reflux.createActions [
-    "incrementForwards"
-    "incrementBackwards"
+    "incrementDate"
     "updateDate"
+    "updateSpeed"
+    "selectNewDate"
   ]
 
 module.exports = DateActions

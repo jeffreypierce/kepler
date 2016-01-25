@@ -10,7 +10,7 @@ Navbar = React.createClass
 
   render: ->
     (
-      <nav className={@state.navbarState.navbarClass}>
+      <nav className={"navbar "+@state.navbarState.openClass}>
         <MainMenu />
         <DateSelect />
         <Controls />

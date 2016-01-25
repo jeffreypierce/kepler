@@ -1,12 +1,27 @@
 bg-color = #111
 transition-speed = 0.3s
 
+@keyframes fadeInFromNone
+  0%
+    display none
+    opacity 0
+  1%
+    display block
+    opacity 0
+
+  100%
+    display block
+    opacity 1
+
 @import "partials/fonts"
 @import "partials/grid"
+@import "partials/dateselect"
 @import "partials/switch"
+@import "partials/slider"
 @import "partials/planet"
 
 body
+  user-select none
   background bg-color
   width 100%
   height 100%
@@ -32,6 +47,20 @@ body
   width 100%
   height 100%
 
+.about
+  padding 0 20px
+  position absolute
+  z-index 300
+  top 50px
+  display none
+  left 0
+  right 0
+
+  &.open
+    display block
+    animation-duration 1s
+    animation-name fadeInFromNone
+
 .navbar
   background-color rgba(0,0,0,0.6)
   position absolute
@@ -50,8 +79,8 @@ body
     bottom 0
     height 100%
     background-color rgba(0,0,0,0.8)
-    .mainmenu .hamburger .hamburger-bars
-    .mainmenu:hover .hamburger .hamburger-bars
+    .mainmenu .hamburger .hamburger__bars
+    .mainmenu:hover .hamburger .hamburger__bars
       background none
       &:before
         top 0
@@ -70,7 +99,7 @@ body
     transition color transition-speed ease-out
     &:hover
       color #fff
-      .hamburger-bars
+      .hamburger__bars
         background #fff
         &:before, &:after
           background #fff
@@ -84,7 +113,7 @@ body
     padding 0
     width 20px
     height 20px
-    .hamburger-bars
+    .hamburger__bars
       position absolute
       top 9px
       left 0
@@ -109,13 +138,6 @@ body
       &:after
         bottom -6px
         transition-property bottom, transform, background-color
-
-  .dateselect
-    text-align center
-    transition color transition-speed ease-out
-    cursor pointer
-    &:hover
-      color #fff
 
 .solarSystem
   position absolute

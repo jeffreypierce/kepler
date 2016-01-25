@@ -21,6 +21,9 @@ class Maths
     Math.atan angle * @rad2deg
   atan2d:(y, x) ->
     Math.atan2(y, x) * @rad2deg
+  normalize: (num, precision = 3) ->
+    multiplier = Math.pow 10, precision
+    Math.round(num * multiplier) / multiplier
 
 
 module.exports = new Maths()
