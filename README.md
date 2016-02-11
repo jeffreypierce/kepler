@@ -1,3 +1,13 @@
-## Kepler
+### Harmonices Mundi
 
-Here is where I'll write a read me.
+View the project at [http://jeffreypierce.net/kepler](http://jeffreypierce.net/kepler)
+
+In 1619 Thomas Kepler published _Harmonices Mundi_, or [The Harmony of the World](https://archive.org/details/ioanniskepplerih00kepl), his exploration of harmony and congruence in geometrical forms and physical phenomena. In it, he traces the soundtrack of the known celestial world, by ascribing a system of notes and interval ratios to the each of the planets on their orbital paths. This “music of the spheres” is a constant hum of sorts, a result of the motion and orbital resonance of each planet based on its revolution around the sun. The theory was based upon an idea previously proposed by Pythagorus and Ptolemy, to which Kepler adds his third law of planetary motion which introduces elliptical orbits. As with many of Kepler’s theories, this contains not only scientific and mathematical research, but also artistic and religious undertones.
+
+For this project I've constructed a model of the univerise as it was understood to Kepler and I then used his calculataions to approximate plantary positions on any given date. It's surprising, if not scary, how accurate his measurements have proved to be. I also used his concepts for the pitches and voicing heard in the "music of the spheres" as explained through out _Harmonicies Mundi_. I've greatly increased the speed of playback (as apposed to "real time", one earth revolution per year) to more easily hear the changing pitches as the planets rotate in their obital path. Jupiter and Saturn's pitches are very low - so a nice pair of headphones or speakers will give a more complete representation.
+
+Ideas, information and modern translations used for this site were informed by the excellent books [Harmonies of Heaven and Earth: Mysticism in Music from Antiquity to the Avant-Garde](http://www.amazon.com/Harmonies-Heaven-Earth-Mysticism-Avant-Garde/dp/0892815000) and [The Harmony of the Spheres: The Pythagorean Tradition in Music](http://www.amazon.com/gp/product/0892812656/ref=pd_lpo_sbs_dp_ss_1?pf_rd_p=1944687642&pf_rd_s=lpo-top-stripe-1&pf_rd_t=201&pf_rd_i=0892815000&pf_rd_m=ATVPDKIKX0DER&pf_rd_r=10QEGCZ9BYNA5GH5YDZQ) by Joscelyn Godwin. You can read some of his thoughts on this topic in the article [Kepler and Kircher on the Harmony of the Spheres](http://hermetic.com/godwin/kepler-and-kircher-on-the-harmony-of-the-spheres.html), in which he includes Kepler's diagram of the musical notation of each planet's pitches.
+
+Select your birthday or anniversay, kick back and listen to some other-worldly dissonance. Enjoy!
+
+[built by jeffrey](http://jeffreypierce.net) • [source on github](http://github.com/jeffreypierce/kepler)
