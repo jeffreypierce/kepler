@@ -12,22 +12,22 @@ uglify         = require "gulp-uglify"
 files =
   html:
     src:   "app/*.jade"
-    dest:  "dist/"
+    dest:  "./"
 
   scripts:
     src:   "app/scripts/app.coffee"
     watch: "app/scripts/**/*.coffee"
     main:  "app.js"
-    dest:  "dist/scripts/"
+    dest:  "scripts/"
 
   styles:
     src:   "app/styles/app.styl"
     watch: "app/styles/**/*styl"
-    dest:  "dist/styles/"
+    dest:  "styles/"
 
   fonts:
     src:   "app/fonts/*.*"
-    dest:  "dist/fonts/"
+    dest:  "fonts/"
 
 args =
   extensions: [".coffee", ".js"]
@@ -53,7 +53,7 @@ gulp.task "scripts", -> bundle
 gulp.task "styles", ->
   gulp.src files.styles.src
     .pipe styl
-      compress: false
+      compress: true
     .pipe autoprefixer 'last 2 versions'
     .pipe gulp.dest files.styles.dest
     .pipe connect.reload()
@@ -61,7 +61,7 @@ gulp.task "styles", ->
 gulp.task "html", ->
   gulp.src files.html.src
     .pipe jade
-      pretty: true
+      pretty: false
     .pipe gulp.dest files.html.dest
     .pipe connect.reload()
 
