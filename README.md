@@ -10,4 +10,4 @@ Ideas, information and modern translations used for this site were informed by t
 
 Select your birthday or anniversay, kick back and listen to some other-worldly dissonance. Enjoy!
 
-[built by jeffrey](http://jeffreypierce.net) • [source on github](http://github.com/jeffreypierce/kepler)
+[built by jeffrey](http://jeffreypierce.net)
