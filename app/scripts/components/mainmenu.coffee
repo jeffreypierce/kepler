@@ -5,7 +5,7 @@ MainMenu = React.createClass
 
   render: ->
     (
-      <div className="grid_4" >
+      <div className="navbar__left" >
         <a className="mainmenu" onClick={NavbarActions.navbarToggle}>
           <div className="hamburger">
             <div className="hamburger__bars">&nbsp;</div>

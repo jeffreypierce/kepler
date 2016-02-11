@@ -120,7 +120,7 @@ class Planet
       @coords.z,
       Math.sqrt(@coords.x * @coords.x + @coords.y * @coords.y + @coords.z * @coords.z))
 
-    @longitude = Maths.normalize @elipticLongitude
+    @longitude = Maths.normalize (270 + @elipticLongitude) % 360
     @latitude = Maths.normalize @elipticLatitude
 
     freq =

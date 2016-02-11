@@ -8,8 +8,6 @@ styl           = require 'gulp-stylus'
 autoprefixer   = require "gulp-autoprefixer"
 connect        = require "gulp-connect"
 
-PROD = process.env.ENV is 'PROD'
-
 files =
   html:
     src:   "app/*.jade"
@@ -46,9 +44,7 @@ bundle = (ids)->
     .pipe source files.scripts.main
     .pipe gulp.dest files.scripts.dest
     .pipe connect.reload()
-
-  if PROD
-    js = js.pipe streamify uglify()
+    # js = js.pipe streamify uglify()
 
 gulp.task "scripts", -> bundle
 
@@ -63,7 +59,7 @@ gulp.task "styles", ->
 gulp.task "html", ->
   gulp.src files.html.src
     .pipe jade
-      pretty: not PROD
+      pretty: true
     .pipe gulp.dest files.html.dest
     .pipe connect.reload()
 

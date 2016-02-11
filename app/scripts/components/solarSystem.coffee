@@ -23,12 +23,13 @@ SolarSystem = React.createClass
       planet.positionOnDate @state.date.moment
       planet.noteFromFreq()
 
+
   componentWillMount: ->
     @calculatePositionOnDate()
 
   render: ->
     (
-      <div>
+      <div className="solar-system">
         {@state.planets.map (planet, i) =>
            <Planet  planetName = {planet.name}
                     planetLabel = {planet.label}

@@ -1,4 +1,8 @@
 bg-color = #111
+highlight-color = #fff
+default-color = #999
+muted-color = #555
+transparent-black = rgba(0,0,0,0.6)
 transition-speed = 0.3s
 
 @keyframes fadeInFromNone
@@ -14,63 +18,37 @@ transition-speed = 0.3s
     opacity 1
 
 @import "partials/fonts"
-@import "partials/grid"
+@import "partials/mainmenu"
 @import "partials/dateselect"
-@import "partials/switch"
-@import "partials/slider"
+@import "partials/controls"
 @import "partials/planet"
 
 body
+  overflow hidden
   user-select none
   background bg-color
   width 100%
   height 100%
-  overflow hidden
   margin 0
-  color #fff
+  color highlight-color
   font-family "Yantramanav"
   font-weight 400
   font-size 13px
 
 .container
-  margin auto
   overflow hidden
-  min-width 1000px
-  position absolute
-  // right 0
-  // left 0
-  // top 0
-  // bottom 0
-  top 50%
-  left 50%
-  transform translateY(-50%) translateX(-50%)
   width 100%
-  height 100%
-
-.about
-  padding 0 20px
-  position absolute
-  z-index 300
-  top 50px
-  display none
-  left 0
-  right 0
-
-  &.open
-    display block
-    animation-duration 1s
-    animation-name fadeInFromNone
 
 .navbar
-  background-color rgba(0,0,0,0.6)
+  background-color transparent-black
   position absolute
   z-index 200
   right 0
   left 0
   top 0
   bottom 100%
-  padding 10px 20px
-  color #999
+  padding 10px 0
+  color default-color
   height 20px
   transition background-color transition-speed ease-out,
     bottom transition-speed ease-out,
@@ -79,66 +57,63 @@ body
     bottom 0
     height 100%
     background-color rgba(0,0,0,0.8)
-    .mainmenu .hamburger .hamburger__bars
-    .mainmenu:hover .hamburger .hamburger__bars
-      background none
-      &:before
-        top 0
-        transform rotate(45deg)
-        transition-delay 0s, transition-speed
-      &:after
-        bottom 0
-        transform rotate(-45deg)
-        transition-delay 0s, transition-speed
 
-  .mainmenu
-    font-weight 300
-    font-size 17px
-    text-transform uppercase
-    cursor pointer
+  &__left
+    position: absolute
+    left 0
+    margin 0 10px
+  &__center
+    position: absolute
+    left 50%
+    transform translateX(-50%)
+  &__right
+    position: absolute
+    right 0
+    margin 0 10px
+
+.solar-system
+  position absolute
+  top 50%
+  left 50%
+  transform translateY(-50%) translateX(-50%)
+  width 1100px
+  height 100%
+
+.about
+  padding 0 20px
+  position absolute
+  z-index 300
+  top 40px
+  display none
+  left 0
+  right 0
+  bottom 0
+  overflow-y auto
+
+  &.open
+    display block
+    animation-duration 1s
+    animation-name fadeInFromNone
+
+  &__info
+    font-size 18px
+    line-height 27px
+    margin 20px 20%
+    font-weight 200
+    @media (max-width: 920px)
+      font-size 16px
+      line-height 24px
+      margin 20px 15%
+
+    @media (max-width: 668px)
+      font-size 14px
+      line-height 21px
+      margin 20px 10%
+
+  &__link
+    color default-color
+    text-decoration none
     transition color transition-speed ease-out
     &:hover
-      color #fff
-      .hamburger__bars
-        background #fff
-        &:before, &:after
-          background #fff
-
-  .title
-    margin-left 25px
-  .hamburger
-    position absolute
-    overflow hidden
-    margin 0
-    padding 0
-    width 20px
-    height 20px
-    .hamburger__bars
-      position absolute
-      top 9px
-      left 0
-      right 0
-      height 2px
-      background-color #999
-      transition background-color transition-speed ease-out
-      &:before
-      &:after
-        position absolute
-        left 0
-        width 100%
-        height 2px
-        background-color #999
-        content: ""
-        transition-duration transition-speed, transition-speed, transition-speed
-        transition-delay transition-speed, 0s, 0s
-        transition-timing-function ease-out, ease-out, ease-out
-      &:before
-        top -6px
-        transition-property top, transform, background-color
-      &:after
-        bottom -6px
-        transition-property bottom, transform, background-color
-
-.solarSystem
-  position absolute
-  z-index 100
+      text-decoration underline
+      color highlight-color

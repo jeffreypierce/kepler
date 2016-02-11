@@ -10,43 +10,45 @@
     transition color transition-speed ease-out
     cursor pointer
     &:hover
-      color #fff
+      color highlight-color
 
   .dateselect__inputs
+    margin-top -2px
     display none
     transition border-color transition-speed ease-out
     &:hover
-      border-color #fff
+      border-color highlight-color
 
   .dateselect__input
     width 20px
-    background-color #000
+    background-color transparent-black
     appearance none
     border none
-    padding 2px
-    color #fff
+    padding 0 2px
+
+    color highlight-color
     text-align center
     &.year
       width 30px
     &:focus
       outline:none
     &::placeholder
-      color #999
+      color default-color
 
   .button
     transition background-color transition-speed ease-out
     display inline-block
-    color #000
+    color transparent-black
     width 18px
     height 18px
     line-height 20px
     margin-left 5px
-    background-color #555
+    background-color muted-color
     text-align center
     cursor pointer
     border-radius 18px
     &:hover
-      background-color #fff
+      background-color highlight-color
 
 
   .today-reset
@@ -54,4 +56,4 @@
     transition color transition-speed ease-out
     cursor pointer
     &:hover
-      color #fff
+      color highlight-color

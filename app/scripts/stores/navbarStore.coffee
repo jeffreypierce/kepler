@@ -6,8 +6,10 @@ interval = null
 navbarState =
   audioOn: false
   animationOn: false
-  openClass: ''
+  playOn: false
+  open: false
   volume: 40
+  controlsVisable: false
 
 NavbarStore = Reflux.createStore
   listenables: NavbarActions
@@ -16,18 +18,45 @@ NavbarStore = Reflux.createStore
 
   onAudioToggle: ->
     navbarState.audioOn = !navbarState.audioOn
+    @checkState()
     @trigger navbarState
 
-  onAnimationToggle: ->
-    navbarState.animationOn = !navbarState.animationOn
+  onPlayToggle: ->
+    navbarState.playOn = !navbarState.playOn
+    if navbarState.playOn
+      navbarState.audioOn = true
+      navbarState.animationOn = true
+    else
+      navbarState.audioOn = false
+      navbarState.animationOn = false
+
+    @animate()
+    @trigger navbarState
+
+  animate: ->
     if navbarState.animationOn
       interval = setInterval DateActions.incrementDate, 50
     else clearInterval interval
 
+  onAnimationToggle: ->
+    navbarState.animationOn = !navbarState.animationOn
+    @animate()
+    @checkState()
+    @trigger navbarState
+
+  checkState: ->
+    if navbarState.animationOn and navbarState.audioOn
+      navbarState.playOn = true
+    else
+      navbarState.playOn = false
+
+  onShowControlsToggle: ->
+    console.log "cricked"
+    navbarState.controlsVisable = !navbarState.controlsVisable
     @trigger navbarState
 
   onNavbarToggle: ->
-    navbarState.openClass = if navbarState.openClass is '' then 'open' else ''
+    navbarState.open = !navbarState.open
     @trigger navbarState
 
   updateVolume: (vol)->

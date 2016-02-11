@@ -1,5 +1,6 @@
 React = require "react"
 Reflux = require "reflux"
+Switch = require "./switch"
 Audio = require '../models/audio'
 NavbarStore = require "../stores/navbarStore"
 
@@ -12,12 +13,13 @@ Planet = React.createClass
   getInitialState: ->
     {
       sound: null,
-      rotation: @rotate(@props.longitude)
+      rotation: @props.longitude
       isSelected: false
+      muted: false
     }
 
   rotate: (pos)->
-    (270 + pos) % 360
+    pos
 
   onAudioToggle: ->
     if @state.navbarState.audioOn and @state.sound is null
@@ -29,6 +31,12 @@ Planet = React.createClass
 
   onPlanetClicked: ->
     @setState {isSelected: !@state.isSelected}
+
+  handleMuteChange: (event)->
+    console.log event
+    event.preventDefault()
+    event.stopPropagation()
+    @setState {muted: !@state.muted}
 
   componentDidMount: ->
     @onAudioToggle()
@@ -50,19 +58,19 @@ Planet = React.createClass
     (
       <div className={@props.planetName + " planet"} >
         <div className={orbitClass} style={orbitRotation} >
-          <div className="body" style={bodyRotation} onClick={@onPlanetClicked} onTouchStart={@onPlanetClicked}>
-            <div className="planet-info">
-            <h3 className="planet-name">{@props.planetName}</h3>
+          <div className="body" style={bodyRotation} onClick={@onPlanetClicked}>
+            <div className="planet__info">
+              <h3 className="planet__name">{@props.planetName}</h3>
               <dl>
                 <dt>Frequency</dt><dd>{@props.freq}</dd>
                 <dt>Approx. Note</dt><dd>{@props.noteName}</dd>
                 <dt>Eliptic Longitude</dt><dd>{@props.longitude}</dd>
                 <dt>Perihelion</dt><dd>{@props.P}</dd>
-
                 <dt>Eliptic Latitude</dt><dd>{@props.latitude}</dd>
               </dl>
+
              </div>
-            <label className="planet-symbol">{@props.planetLabel}</label>
+            <label className="planet__symbol">{@props.planetLabel}</label>
           </div>
         </div>
       </div>

@@ -1,0 +1,63 @@
+.mainmenu
+  font-weight 300
+  font-size 17px
+  text-transform uppercase
+  cursor pointer
+  transition color transition-speed ease-out
+  &:hover
+    color highlight-color
+    .hamburger__bars
+      background highlight-color
+      &:before, &:after
+        background highlight-color
+
+  .title
+    margin-left 25px
+    @media (max-width: 480px)
+      display none
+
+  .hamburger
+    position absolute
+    overflow hidden
+    margin 0
+    padding 0
+    width 20px
+    height 20px
+    &__bars
+      position absolute
+      top 9px
+      left 0
+      right 0
+      height 2px
+      background-color default-color
+      transition background-color transition-speed ease-out
+      &:before
+      &:after
+        position absolute
+        left 0
+        width 100%
+        height 2px
+        background-color default-color
+        content: ""
+        transition-duration transition-speed, transition-speed, transition-speed
+        transition-delay transition-speed, 0s, 0s
+        transition-timing-function ease-out, ease-out, ease-out
+      &:before
+        top -6px
+        transition-property top, transform, background-color
+      &:after
+        bottom -6px
+        transition-property bottom, transform, background-color
+
+.navbar.open
+  .mainmenu .hamburger .hamburger__bars
+  .mainmenu:hover .hamburger .hamburger__bars
+    background none
+    &:before
+      top 0
+      transform rotate(45deg)
+      transition-delay 0s, transition-speed
+    &:after
+      bottom 0
+      transform rotate(-45deg)
+      transition-delay 0s, transition-speed

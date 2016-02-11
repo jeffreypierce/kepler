@@ -48,20 +48,22 @@ DateSelect = React.createClass
     @switchDisplay()
 
   render: ->
-    dateselectClass = "grid_4 dateselect"
+    dateselectClass = "dateselect"
     if !@state.displayState
-      dateselectClass = "grid_4 dateselect input-on"
+      dateselectClass = "dateselect input-on"
     (
-      <div className={dateselectClass}>
-        <a onClick={@switchDisplay} className="dateselect__display">{@state.date.string}</a>
-        <span className="dateselect__inputs">
-          <input className="dateselect__input month" maxLength="2" placeholder="MM" value={@state.month} onKeyDown={@handleKeyDown} onChange={@handleMonthChange} type="text" pattern="[0-9]*" inputmode="numeric" />/
-          <input className="dateselect__input day"  maxLength="2" placeholder="DD" value={@state.day} onKeyDown={@handleKeyDown} onChange={@handleDayChange} type="text" pattern="[0-9]*" inputmode="numeric"/>/
-          <input className="dateselect__input year" maxLength="4" placeholder="YYYY" value={@state.year} onKeyDown={@handleKeyDown} onChange={@handleYearChange} type="text" pattern="[0-9]*" inputmode="numeric" />
-          <div onClick={@setDate} className="button go">&#10132;</div>
-          <a className="today-reset" onClick={@resetToToday}>Today</a>
+      <div className="navbar__center">
+        <div className={dateselectClass}>
+          <a onClick={@switchDisplay} className="dateselect__display">{@state.date.string}</a>
+          <span className="dateselect__inputs">
+            <input className="dateselect__input month" maxLength="2" placeholder="MM" value={@state.month} onKeyDown={@handleKeyDown} onChange={@handleMonthChange} type="text" pattern="[0-9]*" inputmode="numeric" />/
+            <input className="dateselect__input day"  maxLength="2" placeholder="DD" value={@state.day} onKeyDown={@handleKeyDown} onChange={@handleDayChange} type="text" pattern="[0-9]*" inputmode="numeric"/>/
+            <input className="dateselect__input year" maxLength="4" placeholder="YYYY" value={@state.year} onKeyDown={@handleKeyDown} onChange={@handleYearChange} type="text" pattern="[0-9]*" inputmode="numeric" />
+            <a onClick={@setDate} className="button go">&#10132;</a>
+            <a className="today-reset" onClick={@resetToToday}>Today</a>
 
-        </span>
+          </span>
+        </div>
       </div>
 
     )

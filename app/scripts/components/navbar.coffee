@@ -9,8 +9,11 @@ Navbar = React.createClass
   mixins: [Reflux.connect NavBarStore,"navbarState"]
 
   render: ->
+    navbarClass = "navbar"
+    if @state.navbarState.open
+      navbarClass = "navbar open"
     (
-      <nav className={"navbar "+@state.navbarState.openClass}>
+      <nav className={navbarClass}>
         <MainMenu />
         <DateSelect />
         <Controls />

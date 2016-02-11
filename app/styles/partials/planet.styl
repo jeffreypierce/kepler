@@ -25,20 +25,18 @@ saturn-orbit = 1000px
 saturn-color = #72853C
 
 
-
-
 planet(orbit, size, color)
   .orbit
     border-radius orbit
     width orbit
     height orbit
 
-    @media (max-width: 900px)
+    @media (max-width: 920px)
       border-radius (orbit * 0.75)
       width (orbit * 0.75)
       height (orbit * 0.75)
 
-    @media (max-width: 600px)
+    @media (max-width: 668px)
       border-radius (orbit * 0.5)
       width (orbit * 0.5)
       height (orbit * 0.5)
@@ -47,19 +45,22 @@ planet(orbit, size, color)
     opacity 50
     &.info-on
       z-index 100
-      .planet-info
+      pointer-events:none;
+      .planet__info
+        pointer-events:all;
         display block
         animation-duration 0.5s
         animation-name fadeInFromNone
 
   .body
+    background-color color
     width size
     height size
     line-height size
     border-radius size
     top (size * -0.5) - orbit-width
     left (orbit * 0.5) - (size * 0.5)
-    @media (max-width: 900px)
+    @media (max-width: 920px)
       width (size * 0.75)
       height (size * 0.75)
       line-height (size * 0.75)
@@ -67,7 +68,7 @@ planet(orbit, size, color)
       top ((size * 0.75) * -0.5) - orbit-width
       left ((orbit * 0.75) * 0.5) - ((size * 0.75) * 0.5)
 
-    @media (max-width: 600px)
+    @media (max-width: 668px)
       width (size * 0.5)
       height (size * 0.5)
       line-height (size * 0.5)
@@ -75,20 +76,15 @@ planet(orbit, size, color)
       top ((size * 0.5) * -0.5) - orbit-width
       left ((orbit * 0.5) * 0.5) - ((size * 0.5) * 0.5)
 
-
-
-    background-color color
-    .planet-symbol
+    .planet__symbol
+      font-size 17px
       padding-left size + orbit-width
-      @media (max-width: 900px)
+      @media (max-width: 920px)
+        font-size 14px
         padding-left (size * 0.75) + orbit-width
-      @media (max-width: 600px)
+      @media (max-width: 668px)
+        font-size 11px
         padding-left (size * 0.5) + orbit-width
-
-    .planet-info
-      left -100px
-      top -190px
-
 
 .orbit
   position absolute
@@ -107,31 +103,30 @@ planet(orbit, size, color)
   &:hover
     cursor pointer
 
-.planet-symbol
-  color #999
+.planet__symbol
+  color default-color
   font-family 'Starfont Sans'
   font-size 17px
   &:hover
     cursor pointer
 
-
-.planet-info
+.planet__info
   padding 20px 40px 30px
   width 200px
-  background-color black
+  background-color rgba(0,0,0,0.8)
   position absolute
-
+  top -10px
+  left -10px
   line-height 20px
   display none
-  .planet-name
+  .planet__name
     text-transform capitalize
   dt, dd
     float left
-
   dt
     width 110px
     clear both
-    color #999
+    color default-color
 
 .mercury
   planet(mercury-orbit, mercury-size, mercury-color)

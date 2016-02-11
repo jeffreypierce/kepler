@@ -33,11 +33,10 @@ DateStore = Reflux.createStore
       date.moment = moment()
 
     @formatDate()
-    # this is terrible - but the only way I could get it to work
+    # FIX ME
+    # this is a sad, terrible hack - but the only way I could get it to work
     @trigger date
     @trigger date
     @trigger date
-
-
 
 module.exports = DateStore
