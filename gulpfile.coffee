@@ -7,6 +7,7 @@ source         = require "vinyl-source-stream"
 styl           = require 'gulp-stylus'
 autoprefixer   = require "gulp-autoprefixer"
 connect        = require "gulp-connect"
+uglify         = require "gulp-uglify"
 
 files =
   html:
@@ -42,9 +43,10 @@ bundle = (ids)->
   bundler.bundle()
     .on "error", (error) -> console.log error
     .pipe source files.scripts.main
+    # .pipe uglify()
     .pipe gulp.dest files.scripts.dest
     .pipe connect.reload()
-    # js = js.pipe streamify uglify()
+
 
 gulp.task "scripts", -> bundle
 
